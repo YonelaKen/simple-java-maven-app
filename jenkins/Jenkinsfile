@@ -1,6 +1,11 @@
 pipeline {
     agent any
     stages {
+        stage('Start master branch') {
+            steps {
+                echo 'This is master branch'
+            }
+        }
         stage('Build') {
             steps {
                 sh 'mvn -B -DskipTests clean package'
@@ -19,6 +24,11 @@ pipeline {
         stage('Deliver') {
             steps {
                 sh './jenkins/scripts/deliver.sh'
+            }
+        }
+        stage('End results') {
+            steps {
+                echo 'This is master branch final step'
             }
         }
     }
